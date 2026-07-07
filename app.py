@@ -1,21 +1,96 @@
 import streamlit as st
 import chatbot_backend as demo
 
-st.set_page_config(page_title="NomadIQ HR Knowledge Assistant with RAG")
+st.set_page_config(
+    page_title="NomadIQ Enterprise HR RAG Assistant",
+    page_icon="🤖",
+    layout="wide"
+)
 
-new_title = '<p style="font-family:sans-serif; color:Green; font-size: 42px;">NomadIQ HR Knowledge Assistant with RAG 🎯</p>'
-st.markdown(new_title, unsafe_allow_html=True)
+# =========================
+# Sidebar
+# =========================
+with st.sidebar:
+    st.image("assets/nomadtec_logo.png", width=230)
 
-st.write("Ask a question about the HR leave policy document.")
+    st.markdown("## Enterprise HR RAG Assistant")
+    st.write(
+        "A GenAI-powered HR knowledge assistant using "
+        "Retrieval-Augmented Generation (RAG)."
+    )
 
-input_text = st.text_area("Enter your HR policy question here")
+    st.divider()
 
-go_button = st.button("📌 Ask NomadIQ", type="primary")
+    st.markdown("### Technology Stack")
+    st.markdown("""
+**AWS AI Services**
+- Amazon Bedrock
+- Titan Embeddings V2
+- DeepSeek v3.2
 
-if go_button:
-    if input_text.strip() == "":
-        st.warning("Please enter a question first.")
+**Vector Search**
+- FAISS
+
+**Frameworks**
+- LangChain
+- Streamlit
+""")
+
+    st.divider()
+
+    st.markdown("### Status")
+    st.write("Production Prototype")
+    st.write("Version: v1.0.0")
+
+    st.divider()
+
+    st.markdown("### Built By")
+    st.write("Larry Dana Gaither")
+    st.caption("NomadTec | Enterprise AI Transformation")
+
+# =========================
+# Main Page
+# =========================
+
+st.title("📚 NomadIQ Enterprise HR Knowledge Assistant")
+
+st.write(
+    "Ask natural-language questions about the HR Leave Policy document. "
+    "Responses are generated using Retrieval-Augmented Generation (RAG) "
+    "with Amazon Bedrock."
+)
+
+st.markdown("## Example Questions")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.info("What types of leave are available?")
+
+with col2:
+    st.info("Explain the difference between Casual Leave and Sick Leave.")
+
+st.divider()
+
+question = st.text_area(
+    "Ask your HR policy question",
+    placeholder="Example: What types of leave are available?"
+)
+
+if st.button("🚀 Ask NomadIQ", type="primary"):
+
+    if question.strip() == "":
+        st.warning("Please enter a question.")
     else:
-        with st.spinner("Retrieving relevant HR policy context and generating an answer..."):
-            response_content = demo.hr_rag_response(input_text)
-            st.write(response_content)
+        with st.spinner("Searching HR policy and generating response..."):
+            answer = demo.hr_rag_response(question)
+
+        st.markdown("## Answer")
+        st.success(answer)
+
+st.divider()
+
+st.caption(
+    "Prototype built using Amazon Bedrock, Titan Embeddings V2, DeepSeek v3.2, "
+    "FAISS, LangChain, and Streamlit."
+)

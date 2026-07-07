@@ -54,5 +54,5 @@ Question:
 Answer:
 """
 
-    response = rag_llm.invoke(prompt)
+    response = rag_llm.invoke([("user", prompt)])
     return response.content
