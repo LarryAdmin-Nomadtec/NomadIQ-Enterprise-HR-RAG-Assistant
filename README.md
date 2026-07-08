@@ -15,6 +15,7 @@ The application uses Retrieval-Augmented Generation (RAG), Amazon Bedrock, Titan
 ### Home Page
 
 ![Home Page](screenshots/home_page.png)
+![Home Page](screenshots/home_page_V2.png)
 
 ---
 
